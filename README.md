@@ -1,6 +1,6 @@
 # Community Resource Navigator
 
-An AI-powered chat tool for **college students and young adults** to find the programs and resources they're actually eligible for — financial aid, food assistance, health coverage, student discounts, mental health support, and more — through a plain, judgment-free conversation.
+A full-stack AI chat tool that helps students navigate 28+ real programs and discounts (financial aid, healthcare, GitHub/Adobe/Spotify deals, and more) through plain-English conversation, keeping the API key secure via a serverless backend proxy.
 
 **Stack:** React + Vite (frontend), Node/Express + Vercel serverless (backend), Claude API (conversation).
 
