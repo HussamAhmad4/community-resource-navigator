@@ -4,10 +4,10 @@ import TypingIndicator from './TypingIndicator.jsx'
 
 const STARTERS = {
   deals: [
-    "I need a laptop for college under $700.",
-    "Best laptop for graphic design or video editing?",
-    "What student software discounts am I missing?",
-    "Affordable headphones for studying?",
+    "What student discounts does Best Buy offer?",
+    "What free or discounted software can I get as a student?",
+    "What subscriptions have student pricing?",
+    "What tech discounts should every college student know about?",
   ],
   campus: [
     "I go to CSI CUNY — what tutoring is available?",
