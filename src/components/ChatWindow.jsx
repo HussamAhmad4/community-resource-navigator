@@ -23,7 +23,7 @@ const STARTERS = {
   ],
 }
 
-export default function ChatWindow({ messages, isLoading, error, onSend, mode }) {
+export default function ChatWindow({ messages, isLoading, error, onSend, mode, bookmarkHandlers }) {
   const scrollRef = useRef(null)
   const showStarters = messages.length === 1
   const starters = STARTERS[mode] || STARTERS.resources
@@ -36,7 +36,7 @@ export default function ChatWindow({ messages, isLoading, error, onSend, mode })
     <div className="chat-window" ref={scrollRef}>
       <div className="chat-window__messages">
         {messages.map((message) => (
-          <MessageBubble key={message.id} message={message} />
+          <MessageBubble key={message.id} message={message} bookmarkHandlers={bookmarkHandlers} />
         ))}
         {isLoading && <TypingIndicator />}
         {error && (

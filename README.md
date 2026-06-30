@@ -1,88 +1,115 @@
 # Community Resource Navigator
 
-A full-stack AI chat tool that helps students navigate 28+ real programs and discounts (financial aid, healthcare, GitHub/Adobe/Spotify deals, and more) through plain-English conversation, keeping the API key secure via a serverless backend proxy.
+> **AI-powered student toolkit** — Find deals, campus programs, and public benefits through plain-English conversation.
 
-**Stack:** React + Vite (frontend), Node/Express + Vercel serverless (backend), Claude API (conversation).
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000?style=for-the-badge&logo=vercel)](https://community-resource-navigator.vercel.app)
+[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)](https://react.dev)
+[![Claude API](https://img.shields.io/badge/Claude-claude--sonnet--4--6-cc785c?style=flat-square)](https://www.anthropic.com)
 
-## How it works
+---
 
-1. The user describes their situation in plain English (e.g. *"I can't afford food this week"* or *"I just turned 26 and lost my insurance"*).
-2. The request goes to `/api/chat` — a backend endpoint that keeps the Anthropic API key server-side only. It never touches the browser.
-3. The backend calls Claude with a system prompt that includes a curated catalog of real programs (`src/data/resources.js`) and instructs it to respond like a knowledgeable, non-judgmental friend — asking one clarifying question at a time when needed, then recommending the most relevant programs by ID.
-4. The frontend renders Claude's reply as a chat bubble and displays matched programs as resource cards with a description, who it's for, and a direct link or phone number to apply.
+## What it does
 
+Three AI-powered tools for college students and young adults:
+
+| Tool | What it finds |
+|------|--------------|
+| 🛍️ **Deal Finder** | Student discounts at Best Buy, Apple, Adobe, Spotify, GitHub, Amazon, UNiDAYS, and more |
+| 🎓 **Campus Finder** | Tutoring, scholarships, food pantries, career services, clubs at your specific school |
+| 🧭 **Resource Guide** | FAFSA, SNAP, Medicaid, PSLF, mental health lines, legal aid — 28+ real programs |
+
+Ask anything in plain English. The AI returns structured, actionable results with direct links and student pricing.
+
+---
+
+## Demo
+
+**Deal Finder** — "What student discounts does Best Buy offer?"
+
+![Deal Finder screenshot](docs/demo-deals.png)
+
+**Campus Finder** — "I go to CSI CUNY — what tutoring is available?"
+
+![Campus Finder screenshot](docs/demo-campus.png)
+
+**Resource Guide** — "I can't afford food this week."
+
+![Resource Guide screenshot](docs/demo-resources.png)
+
+---
+
+## Stack
+
+- **Frontend:** React 19 + Vite — component-based chat UI with glassmorphism dark theme
+- **AI:** Claude API (`claude-sonnet-4-6`) via structured JSON output — no SDK, raw fetch
+- **Backend:** Vercel serverless function (`api/chat.js`) proxies the API key; Express local dev server
+- **Storage:** `localStorage` for bookmarks and conversation history
+- **Rate limiting:** In-memory Map, 10 req/min per IP
+
+---
+
+## Resume blurb
+
+> Designed and built a full-stack AI chat tool that helps students navigate 28+ real programs and discounts (financial aid, healthcare, GitHub/Adobe/Spotify deals, and more) through plain-English conversation, keeping the API key secure via a serverless backend proxy.
+
+---
+
+## Local setup
+
+```bash
+# 1. Clone
+git clone https://github.com/HussamAhmad4/community-resource-navigator.git
+cd community-resource-navigator
+
+# 2. Install
+npm install
+
+# 3. Set your API key
+cp .env.example .env
+# → Edit .env and set ANTHROPIC_API_KEY=sk-ant-...
+
+# 4. Run (frontend + backend in parallel)
+npm run dev:all
+# Frontend: http://localhost:5173
+# API:      http://localhost:8787
 ```
-React UI  →  /api/chat  →  Claude API
-                  ↓
-     src/data/resources.js (resource catalog)
+
+---
+
+## Deploy to Vercel
+
+```bash
+npm install -g vercel
+vercel
+# Set ANTHROPIC_API_KEY in Vercel dashboard → Project → Settings → Environment Variables
 ```
 
-## What's in the resource catalog
-
-28 real programs and resources across 8 categories:
-
-- **Financial Aid** — FAFSA, Pell Grant, emergency student aid
-- **Student Loan Help** — Income-Driven Repayment, PSLF
-- **Food Assistance** — campus pantries, SNAP (student rules), Feeding America, WIC
-- **Health Coverage** — Medicaid, healthcare.gov marketplace
-- **Mental Health** — 988 Lifeline, Crisis Text Line, NAMI HelpLine
-- **Student Discounts** — GitHub Student Pack, Microsoft 365 (free), Adobe CC, UNiDAYS, Amazon Prime Student, Spotify+Hulu
-- **Money & Taxes** — free VITA tax prep, EITC, Unemployment Insurance
-- **Jobs, Housing & More** — Job Corps, free legal aid, 211 Helpline, youth housing programs, Lifeline phone/internet discount
+---
 
 ## Project structure
 
 ```
-src/
-  components/      Chat UI: header, message bubbles, resource cards, input, footer
-  hooks/useChat.js  Chat state + fetch to /api/chat
-  data/resources.js Curated catalog of programs (Claude's knowledge base)
-  App.jsx, main.jsx React entry points
-lib/
-  chatHandler.js    Calls Claude API, parses structured JSON response
-  systemPrompt.js   Builds system prompt + embeds resource catalog
-api/chat.js         Vercel serverless function (production)
-server/index.js     Express server for local development
+├── api/
+│   └── chat.js            # Vercel serverless function (API proxy + rate limiter)
+├── server/
+│   └── index.js           # Express dev server
+├── lib/
+│   ├── chatHandler.js     # Claude API caller + JSON parser
+│   ├── systemPrompts.js   # Three mode-specific system prompts
+│   └── resourcesHelper.js # Resource ID → object lookup
+├── src/
+│   ├── data/
+│   │   ├── resources.js   # 28 real US programs
+│   │   └── featuredDeals.js
+│   ├── hooks/
+│   │   ├── useChat.js
+│   │   └── useBookmarks.js
+│   └── components/        # Chat UI, cards, filters, bookmarks panel
+└── .env.example
 ```
 
-`api/chat.js` and `server/index.js` both import the same `lib/chatHandler.js` — the logic lives in one place.
+---
 
-## Getting started
+## Security note
 
-### 1. Install
-
-```bash
-npm install
-```
-
-### 2. Add your Anthropic API key
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env` and paste your key from [console.anthropic.com](https://console.anthropic.com/settings/keys). Never commit this file.
-
-### 3. Run locally
-
-```bash
-npm run dev:all
-```
-
-Starts both the Vite frontend and the Express API server. The frontend proxies `/api/*` to the backend automatically. Open the URL Vite prints (usually `http://localhost:5173`).
-
-## Deploy to Vercel (free)
-
-1. Push this repo to GitHub.
-2. Import it at [vercel.com](https://vercel.com).
-3. Add `ANTHROPIC_API_KEY` in the project's Environment Variables.
-4. Deploy. Vercel auto-builds the Vite frontend and promotes `api/chat.js` to a serverless function.
-
-## Notes
-
-- Program data is accurate as of 2025 but rules and links change. The app always tells users to verify with the official source.
-- This is informational only — not legal, financial, or medical advice.
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+The Anthropic API key is **never** exposed to the browser. All Claude requests are proxied through the serverless function / Express server. The `.env` file is gitignored.
