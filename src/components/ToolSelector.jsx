@@ -1,7 +1,4 @@
 import { useState } from 'react'
-import { FEATURED_DEALS, CUNY_SCHOOLS } from '../data/featuredDeals.js'
-
-const TOOLS = [
   { mode: 'deals', icon: '🛍️', label: 'Deal Finder', desc: 'Student discounts on tech, software & subscriptions', accent: '#818cf8', glow: 'rgba(129,140,248,0.25)', badge: null },
   { mode: 'campus', icon: '🎓', label: 'Campus Finder', desc: 'Tutoring, scholarships, food pantries, clubs at your school', accent: '#22d3ee', glow: 'rgba(34,211,238,0.25)', badge: null },
   { mode: 'cuny', icon: '🏫', label: 'CUNY Guide', desc: 'ASAP, SEEK, TAP, Excelsior, Single Stop & all CUNY programs', accent: '#f59e0b', glow: 'rgba(245,158,11,0.25)', badge: 'NYC' },
@@ -70,4 +67,4 @@ export default function ToolSelector({ onSelect }) {
               </div>
         </div>
       )
-}</div>
+}
