@@ -393,3 +393,53 @@ a { color: var(--primary); }
   .bookmarks-panel { width: 100%; }
   .featured-strip { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
+
+/* ── Deal filter strip ─────────────────────────────────────────────── */
+.deal-filter-strip {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 12px; width: 100%; max-width: 940px;
+    justify-content: center;
+}
+.deal-filter-btn {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+    color: var(--text-soft); cursor: pointer; padding: 5px 14px; font-size: 0.8rem;
+    font-weight: 500; transition: all 0.15s ease; font-family: inherit;
+}
+.deal-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+.deal-filter-btn--active { background: var(--primary); color: #fff; border-color: var(--primary); font-weight: 600; }
+
+/* ── CUNY chip on deal strip ───────────────────────────────────────── */
+.featured-chip--cuny { border-color: rgba(245,158,11,0.4); color: #fbbf24; }
+.featured-chip--cuny .featured-chip__tag { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.featured-chip--cuny:hover { border-color: #f59e0b; background: rgba(245,158,11,0.08); }
+
+/* ── CUNY schools section ──────────────────────────────────────────── */
+.cuny-schools-section { width: 100%; max-width: 940px; margin-bottom: 20px; }
+.cuny-schools-toggle {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+    color: var(--text-soft); cursor: pointer; padding: 10px 18px; font-size: 0.85rem;
+    font-family: inherit; width: 100%; text-align: left; display: flex;
+    align-items: center; justify-content: space-between; transition: all 0.15s ease;
+}
+.cuny-schools-toggle:hover { background: var(--surface-2); border-color: #f59e0b; color: #fbbf24; }
+.cuny-schools-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px; margin-top: 10px; animation: fade-up 0.2s ease;
+}
+.cuny-school-chip {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 8px 12px; display: flex; flex-direction: column; gap: 2px;
+    text-decoration: none; transition: all 0.15s ease;
+}
+.cuny-school-chip:hover { border-color: #f59e0b; background: rgba(245,158,11,0.06); }
+.cuny-school-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.cuny-school-borough { font-size: 0.72rem; color: var(--text-muted); }
+
+/* ── Tool card badge ───────────────────────────────────────────────── */
+.tool-card { position: relative; }
+.tool-card__badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--card-accent, var(--primary)); color: #fff;
+    font-size: 0.65rem; font-weight: 700; padding: 2px 7px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em;
+}
