@@ -35,8 +35,12 @@ export function useChat(mode = 'resources') {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: historyRef.current, mode }),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || 'Something went wrong.')
+      const contentType = res.headers.get('content-type')
+              if (!contentType || !contentType.includes('application/json')) {
+                          throw new Error('The chat service is not available. This demo requires a backend server.')
+              }
+              const data = await res.json()
+              if (!res.ok) throw new Error(data?.error || 'Something went wrong.')
       historyRef.current = [...historyRef.current, { role: 'assistant', content: data.reply }]
       setMessages((prev) => [...prev, {
         id: nextId(), role: 'assistant', content: data.reply,
