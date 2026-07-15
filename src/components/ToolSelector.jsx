@@ -10,7 +10,7 @@ import { FEATURED_DEALS, CUNY_SCHOOLS } from '../data/featuredDeals.js'
 
 const DEAL_CATEGORIES = ['All', 'Free', 'CUNY', '$5.99/mo', '60% off', 'Free trial', '67% off']
 
-export default function ToolSelector({ onSelect }) {
+export default function ToolSelector({ onSelect, onCheckup }) {
     const [dealFilter, setDealFilter] = useState('All')
     const [showCunySchools, setShowCunySchools] = useState(false)
     const filteredDeals = dealFilter === 'All' ? FEATURED_DEALS : FEATURED_DEALS.filter((d) => d.tag === dealFilter)
@@ -23,7 +23,16 @@ export default function ToolSelector({ onSelect }) {
                       <h1 className="home__title">Community<br /><span className="home__title-accent">Resource Navi</span></h1>
                       <p className="home__subtitle">AI-powered tools to find discounts, campus programs, CUNY opportunities, and public benefits — through plain conversation.</p>
               </div>
-        
+
+              <button type="button" className="checkup-banner" onClick={onCheckup}>
+                <span className="checkup-banner__icon" aria-hidden="true">💰</span>
+                <span className="checkup-banner__text">
+                  <strong>Benefit Checkup</strong>
+                  <span>8 quick questions — see how much money you might be leaving on the table</span>
+                </span>
+                <span className="checkup-banner__cta">Start →</span>
+              </button>
+
               <div className="deal-filter-strip" aria-label="Filter deals">
                 {DEAL_CATEGORIES.map((cat) => (
                     <button key={cat} type="button" className={`deal-filter-btn${dealFilter === cat ? ' deal-filter-btn--active' : ''}`} onClick={() => setDealFilter(cat)}>{cat}</button>

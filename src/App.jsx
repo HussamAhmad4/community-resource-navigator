@@ -5,6 +5,7 @@ import ChatWindow from './components/ChatWindow.jsx'
 import ChatInput from './components/ChatInput.jsx'
 import Footer from './components/Footer.jsx'
 import BookmarksPanel from './components/BookmarksPanel.jsx'
+import CheckupWizard from './components/CheckupWizard.jsx'
 import { useChat } from './hooks/useChat.js'
 import { useBookmarks } from './hooks/useBookmarks.js'
 
@@ -20,6 +21,7 @@ export default function App() {
   const [view, setView]               = useState('home')
   const [mode, setMode]               = useState('resources')
   const [bookmarksOpen, setBookmarksOpen] = useState(false)
+  const [pendingAsk, setPendingAsk] = useState(null)
 
   const { messages, isLoading, error, sendMessage, reset } = useChat(mode)
   const bm = useBookmarks()
@@ -33,10 +35,35 @@ export default function App() {
     setView('chat')
   }
 
+  // From checkup results: jump into Resource Guide chat and ask about a program.
+  // useChat resets history when mode changes, so the question is sent from an
+  // effect that runs after that reset.
+  const handleAskNavi = (programName) => {
+    setMode('resources')
+    setView('chat')
+    setPendingAsk(`How do I apply for ${programName}? What do I need to have ready?`)
+  }
+
+  useEffect(() => {
+    if (pendingAsk && view === 'chat') {
+      sendMessage(pendingAsk)
+      setPendingAsk(null)
+    }
+  }, [pendingAsk, view, sendMessage])
+
+  if (view === 'checkup') {
+    return (
+      <div className="app-shell app-shell--home">
+        <CheckupWizard onBack={() => setView('home')} onAskNavi={handleAskNavi} />
+        <Footer minimal />
+      </div>
+    )
+  }
+
   if (view === 'home') {
     return (
       <div className="app-shell app-shell--home">
-        <ToolSelector onSelect={handleSelectTool} />
+        <ToolSelector onSelect={handleSelectTool} onCheckup={() => setView('checkup')} />
         <Footer minimal />
       </div>
     )

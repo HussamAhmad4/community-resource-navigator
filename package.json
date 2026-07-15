@@ -10,7 +10,8 @@
     "dev:all": "concurrently -n web,api -c blue,green \"npm:dev\" \"npm:dev:api\"",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "test:checkup": "node scripts/test-eligibility.mjs"
   },
   "dependencies": {
     "react": "^19.2.7",
