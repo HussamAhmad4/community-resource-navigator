@@ -514,6 +514,5 @@ export const resources = [
         tags: ['github', 'developer', 'tech', 'free', 'coding', 'student pack', 'tools', 'cloud'],
     },
 ]
-      ]
 
 export const categories = [...new Set(resources.map((r) => r.category))]

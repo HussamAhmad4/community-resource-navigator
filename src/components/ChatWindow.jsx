@@ -15,6 +15,18 @@ const STARTERS = {
     "How do I find internships through my school?",
     "Does my campus have a food pantry?",
   ],
+  cuny: [
+    "I go to CSI \u2014 am I eligible for ASAP or SEEK?",
+    "How do I apply for TAP and the Excelsior Scholarship?",
+    "What is Single Stop and what can it do for me?",
+    "Does my CUNY campus have a food pantry?",
+  ],
+  opportunities: [
+    "I'm a junior CS major looking for a paid summer internship.",
+    "What research programs pay undergrads?",
+    "What scholarships can I still apply for this year?",
+    "What tech programs help underrepresented students break in?",
+  ],
   resources: [
     "I can't afford food this week.",
     "I need help paying for college or managing my loans.",

@@ -21,6 +21,13 @@ app.post('/api/chat', async (req, res) => {
   if (!checkRateLimit(ip)) return res.status(429).json({ error: 'Too many requests. Please wait a minute.' })
   try {
     const { messages, mode = 'resources' } = req.body ?? {}
+    const VALID_MODES = ['resources', 'deals', 'campus', 'cuny', 'opportunities']
+    if (!VALID_MODES.includes(mode)) {
+      res.status(400).json({ error: 'Invalid mode.' }); return
+    }
+    if (Array.isArray(messages) && messages.some((m) => typeof m.content !== 'string' || m.content.length > 4000)) {
+      res.status(400).json({ error: 'Messages must be strings under 4000 characters.' }); return
+    }
     if (!Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({ error: '"messages" must be a non-empty array.' })
     }
