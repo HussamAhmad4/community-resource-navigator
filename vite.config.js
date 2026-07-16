@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: process.env.VERCEL ? '/' : '/community-resource-navigator/',
+    base: process.env.VERCEL ? '/' : '/sprindl/',
   plugins: [react()],
   server: {
     port: 5173,
