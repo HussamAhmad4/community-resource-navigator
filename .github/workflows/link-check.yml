@@ -1,0 +1,21 @@
+name: Link check
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'   # every Monday, 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check catalog links
+        run: node scripts/check-links.mjs
