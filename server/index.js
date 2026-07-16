@@ -20,7 +20,7 @@ app.post('/api/chat', async (req, res) => {
   const ip = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.ip || 'unknown'
   if (!checkRateLimit(ip)) return res.status(429).json({ error: 'Too many requests. Please wait a minute.' })
   try {
-    const { messages, mode = 'resources' } = req.body ?? {}
+    const { messages, mode = 'resources', profile = null } = req.body ?? {}
     const VALID_MODES = ['resources', 'deals', 'campus', 'cuny', 'opportunities']
     if (!VALID_MODES.includes(mode)) {
       res.status(400).json({ error: 'Invalid mode.' }); return
@@ -31,7 +31,8 @@ app.post('/api/chat', async (req, res) => {
     if (!Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({ error: '"messages" must be a non-empty array.' })
     }
-    const result = await getChatResponse(messages, mode)
+    const safeProfile = typeof profile === 'string' && profile.length <= 600 ? profile : null
+    const result = await getChatResponse(messages, mode, safeProfile)
     res.json({
       reply:     result.reply,
       followUp:  result.followUp,
