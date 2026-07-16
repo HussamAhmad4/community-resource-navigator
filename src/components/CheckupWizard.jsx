@@ -21,7 +21,7 @@ function ProgramCard({ rule, onAskNavi }) {
       <div className="checkup-card__actions">
         <a href={rule.link} target="_blank" rel="noreferrer" className="btn btn--small">Official site ↗</a>
         <button type="button" className="btn btn--small btn--ghost" onClick={() => onAskNavi(rule.name)}>
-          Ask Navi about this
+          Ask Sprindl about this
         </button>
       </div>
     </div>
