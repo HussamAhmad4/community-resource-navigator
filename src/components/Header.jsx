@@ -14,7 +14,7 @@ export default function Header({ mode, onBack, onReset, hasConversation, bookmar
           <span className="app-header__mode-icon">{meta.icon}</span>
           <div>
             <h1>{meta.label}</h1>
-            <p>Community Resource Navigator</p>
+            <p>Sprindl</p>
           </div>
         </div>
       </div>
