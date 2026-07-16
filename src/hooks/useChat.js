@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const WELCOME = {
-  resources: "Hey, I'm Navi! I help students find benefits, financial aid, food assistance, health coverage, and more. What's going on?",
-  deals: "Hey! I'm Navi, your student deal finder \u{1F6CD}\u{FE0F} Tell me what you're looking for \u2014 like \"I need a laptop for college under $700\" \u2014 and I'll find you the best options with student discounts.",
-  campus: "Hey! I'm Navi, your campus guide \u{1F393} Tell me what school you go to and what you're looking for \u2014 tutoring, scholarships, clubs, career programs, food pantries, anything.",
-  cuny: "Hey! I'm Navi, your CUNY guide \u{1F3EB} Ask me about ASAP, SEEK, TAP, Excelsior, Single Stop, food pantries \u2014 anything at any CUNY campus. Which school do you go to?",
-  opportunities: "Hey! I'm Navi \u{1F680} I help students find paid internships, research programs, fellowships, and scholarships. Tell me your year and major and I'll point you somewhere real.",
+  resources: "Hey, I'm Sprindl! I help students find benefits, financial aid, food assistance, health coverage, and more. What's going on?",
+  deals: "Hey! I'm Sprindl, your student deal finder \u{1F6CD}\u{FE0F} Tell me what you're looking for \u2014 like \"I need a laptop for college under $700\" \u2014 and I'll find you the best options with student discounts.",
+  campus: "Hey! I'm Sprindl, your campus guide \u{1F393} Tell me what school you go to and what you're looking for \u2014 tutoring, scholarships, clubs, career programs, food pantries, anything.",
+  cuny: "Hey! I'm Sprindl, your CUNY guide \u{1F3EB} Ask me about ASAP, SEEK, TAP, Excelsior, Single Stop, food pantries \u2014 anything at any CUNY campus. Which school do you go to?",
+  opportunities: "Hey! I'm Sprindl \u{1F680} I help students find paid internships, research programs, fellowships, and scholarships. Tell me your year and major and I'll point you somewhere real.",
 }
 
 let idCounter = 0
